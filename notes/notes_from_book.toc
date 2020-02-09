@@ -1,0 +1,4 @@
+\babel@toc {british}{}
+\contentsline {section}{\numberline {1}Random walk with absorbing barriers}{1}{section.1}% 
+\contentsline {subsection}{\numberline {1.1}Solutions for $r=1/2$ and $r\neq \/2$}{2}{subsection.1.1}% 
+\contentsline {subsection}{\numberline {1.2}Thermo limit}{3}{subsection.1.2}% 

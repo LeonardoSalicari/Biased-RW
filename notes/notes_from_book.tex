@@ -1,0 +1,137 @@
+
+\documentclass[4apaper,11pt,fleqn]{article}
+
+% package imports
+% ---------------
+
+\usepackage[british]{babel} % for correct language and hyphenation and stuff
+\usepackage{enumitem}       % for configuring list environments
+\usepackage{fancyhdr}       % for setting header and footer
+\usepackage{geometry}       % for setting margins (\newgeometry)
+\usepackage{graphicx}       % for pictures
+\usepackage{microtype}      % for microtypography stuff
+\usepackage{xcolor}         % for colours
+\usepackage{amsmath}        % improve math presentation
+\usepackage{amssymb}	      % math's symbols
+\usepackage{amsfonts}       % standard math's amsfonts
+\usepackage{mathtools}      % for improved notation
+\usepackage{amsthm}         % for def, theorems etc.
+\usepackage[hidelinks]{hyperref}
+
+% definition and remarks
+% ------------
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+
+% fancyness for the page
+% -----------------
+
+\pagestyle{fancy}                 % for select a style
+\fancyhf{}                        % for emptying the head and the foot
+\rhead{\nouppercase{\leftmark}}   % print on the right head the current section name and number (for article)
+\rfoot{\thepage}                  % page number on the lower right part
+
+
+% main document
+% ----------------
+
+% title
+\title{Notes about Complex Systems' presentation}
+\author{Leonardo Salicari}
+%\date{}
+
+\begin{document}
+
+% title and table of content
+\maketitle
+\tableofcontents
+
+
+% Ch 1.5.2
+% ---------------
+\section{Random walk with absorbing barriers}
+\begin{dfn}[Absorbing barrier]
+  An absorbing barrier is a state $i$ such that in the corresponding Markov chain has $W_{ii} = 1$.
+  Hence, from normalization, $W_{ji} = 0 \quad \forall  j \neq i$.
+\end{dfn}
+Setup: we have a 1D random walker in a system of $N$ discrete   points. Both in $1$ and $N$ we have absorbing barriers. The corresponding transition probability matrix is the follow:
+\begin{align*}
+  W = \left( \begin{array}{ccccccccc}{1} & {0} & {0} & {0} & {0} & {\cdots} & {0} & {0} & {0} \\ {0} & {0} & {1-r} & {0} & {0} & {\cdots} & {0} & {0} & {0} \\ {0} & {r} & {0} & {1-r} & {0} & {\cdots} & {0} & {0} & {0} \\ {0} & {0} & {r} & {0} & {1-r} & {\cdots} & {0} & {0} & {0} \\ {\vdots} & {\vdots} & {\vdots} & {\vdots} & {\vdots} & {\ddots} & {\vdots} & {\vdots} & {\vdots} \\ {0} & {0} & {0} & {0} & {0} & {\cdots} & {0} & {0} & {1} \end{array} \right)
+\end{align*}
+where $ W_{i+1,i} = r $ and $W_{i-1,i} = 1-r$. Note the absorbing conditions on 1 and $N$.\\
+For any $j \in [1,N] \subset \mathbb{N}$ the walker has probability 1 to be absorbed by one of the barriers. We can conclude that from the structure of $W$ the MC is irreducible but, apart of the persistent states 1 and $N$, all the others are transient
+\begin{dfn}
+  A MC is said to be \emph{irreducible} if all states are accessible from any other states. Formally, there exist a $t$ such that $W^t_{j,i} > 0 \quad \forall j, i$.\\
+  A state $i$ is said to be \emph{persistent} if $W_{i,i}=1$. On the other hand, is said to be \emph{transient} if $W_{i,i}<1$.
+\end{dfn}
+
+Which is th probability that a RW starting in $j$ will reach 1 without being absorbed by $N$?\\
+Let $p_j =$ time-dependent prob to be trapped at 1 given that the RM started in $j$ at $t=0$. For $j \in [2,N-1]$ it obeys the equation:
+\begin{align}
+  \label{eq:pj}
+  p_{j} &=W_{j+1, j} \, p_{j+1} + W_{j-1, j}\, p_{j-1} \\ \notag
+  &=r\, p_{j+1}  + (1-r)\, p_{j-1}
+\end{align}
+which has the same formal structure of the probability distribution for a RW on a ring but with the boundary conditions $p_1 = 1$ and $p_N = 0$, because of its definition. It isn't obvious but the latter equation, first equality, stems for the basic rule that the joint probability of independent events is the product of the probabilities of each single event, e.g. for the first term being trapped in 1 starting form $j+1$ and passing from $j$ to $j+1$. (???)
+Note also that $W$ is actually a transition rate when considering discrete and unitary time steps, as in our case.
+
+% solution to the equation
+\subsection{Solutions for $r=1/2$ and $r\neq\/2$}
+We assume $p_k = \psi^k$, i.e the parameter $\psi$ to the $k$, hence
+\begin{align*}
+  \psi^j = r\psi^{j+1} + (1-r) \psi^{j-1} \quad \Rightarrow \quad 0 = r\psi^2 - \psi + (1-r)
+\end{align*}
+which has the solutions (just substitute):
+\begin{itemize}[leftmargin=*]
+  \item $\psi_1 = 1 \Rightarrow p_j^{(1)} = 1$
+  \item $\psi_2 = (1-r)/r := s \Rightarrow  p_j^{(2)} = s^j$
+\end{itemize}
+\begin{rem}
+  This solutions are such thanks to the ansatz $p_k = \psi^k$
+\end{rem}
+These are degenerate when $r=1/2$; in this case it appears another solution which is $p_j^{(2)} = j$ (here we are calling 2 the second non degenerate solution). This is a solution because the equation \eqref{eq:pj} becomes $p_j = (p_{j+1}+p_{j-1})/2$.\\
+For $r\neq1/2$ the general solution of the equation is given by the linear combination of independent solutions, hence:
+\begin{align*}
+  p_j = As^j + B
+\end{align*}
+where $A$ and $B$ are constants which are fixed by the boundary conditions:
+\begin{align*}
+   &p_1 = As + B = 1\\
+   &p_N = As^N + B = 0\\
+   &\Rightarrow A= \frac{1}{s(1-s^{N-1})} \qquad B = - \frac{s^{N-1}}{(1-s^{N-1})}
+\end{align*}
+Thus the solution for the \emph{asymmetric case} is
+\begin{align}
+  p_j^{as} = \frac{s^{j-1}-s^{N-1}}{1-s^{N-1}}
+\end{align}
+\begin{rem}
+  This is the one, together with the symmetric solution, that will be tested numerically
+\end{rem}
+
+For $r=1/2$ the boundary conditions gives:
+\begin{align*}
+  A = -\frac{1}{N-1} \qquad B = \frac{N}{N-1}
+\end{align*}
+resulting the the solution for the \emph{symmetric case}:
+\begin{align}
+  p_j^{s} = \frac{N-j}{N-1}
+\end{align}
+
+\subsection{Thermo limit}
+For $r>1/2$ (or $s<1$) and in the limit $N \rightarrow \infty$, we have:
+\begin{align*}
+  A = 1/s \qquad B = 0 \qquad \Rightarrow \qquad p_j = s^{j-1}
+\end{align*}
+hence the probability of being absorbed in 1 starting at $j$ decreases exponentially with $j$ because the system has a bias ($r>1/2$) toward the other absorbing barrier with is at infinity. On the other hand, if $r<1/2$ we have $p_j=1 \quad \forall j$ because the system is driven toward the absorbing 1 state. Stated in other words, eventually the RW will remain trapped in 1.\\
+The same conclusion can be drawn for $r=1/2$ because the unbiased RW is such that any state is visited from any other in a finite amount of time, i.e. from every $j$ eventually one arrives at 1. This can be seen by the symmetric solution or by showing that the unbiased RW is an irreducible MC.
+Hence we can conclude:
+\begin{align*}
+  p_j = 1 \qquad r \leq \frac{1}{2} \quad \text{and} \quad N \rightarrow \infty
+\end{align*}
+
+
+
+\end{document}
