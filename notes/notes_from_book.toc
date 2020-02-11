@@ -1,4 +1,13 @@
 \babel@toc {british}{}
 \contentsline {section}{\numberline {1}Random walk with absorbing barriers}{1}{section.1}% 
-\contentsline {subsection}{\numberline {1.1}Solutions for $r=1/2$ and $r\neq \/2$}{2}{subsection.1.1}% 
+\contentsline {subsection}{\numberline {1.1}Solutions for $r=1/2$ and $r\neq 1/2$}{2}{subsection.1.1}% 
 \contentsline {subsection}{\numberline {1.2}Thermo limit}{3}{subsection.1.2}% 
+\contentsline {section}{\numberline {2}FP: Stationary diffution with absorbing barriers}{4}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}Stationary solution in the diffusive case}{5}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Probability to leave from $X_1$}{6}{subsection.2.2}% 
+\contentsline {section}{\numberline {3}Isotropic RW with a trap}{7}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}First passage probability}{7}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2}Mean position}{8}{subsection.3.2}% 
+\contentsline {section}{\numberline {4}Anisotropic RW with a trap}{8}{section.4}% 
+\contentsline {subsection}{\numberline {4.1}First passage time}{9}{subsection.4.1}% 
+\contentsline {subsection}{\numberline {4.2}Average time before being trapped}{10}{subsection.4.2}% 

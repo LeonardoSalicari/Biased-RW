@@ -32,7 +32,7 @@
 \pagestyle{fancy}                 % for select a style
 \fancyhf{}                        % for emptying the head and the foot
 \rhead{\nouppercase{\leftmark}}   % print on the right head the current section name and number (for article)
-\rfoot{\thepage}                  % page number on the lower right part
+\lfoot{\thepage}                  % page number on the lower right part
 
 
 % main document
@@ -75,11 +75,11 @@ Let $p_j =$ time-dependent prob to be trapped at 1 given that the RM started in 
   p_{j} &=W_{j+1, j} \, p_{j+1} + W_{j-1, j}\, p_{j-1} \\ \notag
   &=r\, p_{j+1}  + (1-r)\, p_{j-1}
 \end{align}
-which has the same formal structure of the probability distribution for a RW on a ring but with the boundary conditions $p_1 = 1$ and $p_N = 0$, because of its definition. It isn't obvious but the latter equation, first equality, stems for the basic rule that the joint probability of independent events is the product of the probabilities of each single event, e.g. for the first term being trapped in 1 starting form $j+1$ and passing from $j$ to $j+1$. (???)
+which has the same formal structure of the probability distribution for a RW on a ring but with the boundary conditions $p_1 = 1$ and $p_N = 0$, because of its definition. It isn't obvious but the latter equation, first equality, stems for the basic rule that the joint probability of independent events is the product of the probabilities of each single event, e.g. for the first term being trapped in 1 starting form $j+1$ and passing from $j$ to $j+1$. (??? TODO)
 Note also that $W$ is actually a transition rate when considering discrete and unitary time steps, as in our case.
 
 % solution to the equation
-\subsection{Solutions for $r=1/2$ and $r\neq\/2$}
+\subsection{Solutions for $r=1/2$ and $r\neq 1/2$}
 We assume $p_k = \psi^k$, i.e the parameter $\psi$ to the $k$, hence
 \begin{align*}
   \psi^j = r\psi^{j+1} + (1-r) \psi^{j-1} \quad \Rightarrow \quad 0 = r\psi^2 - \psi + (1-r)
@@ -117,9 +117,11 @@ For $r=1/2$ the boundary conditions gives:
 \end{align*}
 resulting the the solution for the \emph{symmetric case}:
 \begin{align}
+  \label{eq:solS}
   p_j^{s} = \frac{N-j}{N-1}
 \end{align}
 
+% thermo limit
 \subsection{Thermo limit}
 For $r>1/2$ (or $s<1$) and in the limit $N \rightarrow \infty$, we have:
 \begin{align*}
@@ -130,6 +132,266 @@ The same conclusion can be drawn for $r=1/2$ because the unbiased RW is such tha
 Hence we can conclude:
 \begin{align*}
   p_j = 1 \qquad r \leq \frac{1}{2} \quad \text{and} \quad N \rightarrow \infty
+\end{align*}
+
+
+% Ch 1.6.3
+% ---------------
+\section{FP: Stationary diffution with absorbing barriers}
+In the context of continuous time ad space Stochastic processes we can introduce as a continuous approximation for the master equation, the Fokker-Planck equation.
+Without entering into details, the general form of the FP equation for the probability density $P(X,t)$ is the following:
+\begin{align*}
+  \frac{\partial P(X, t)}{\partial t}=-\frac{\partial}{\partial X}(a(X, t) P(X, t))+\frac{1}{2} \frac{\partial^{2}}{\partial X^{2}}\left(b^{2}(X, t) P(X, t)\right)
+\end{align*}
+where $a(X,t)$ is the generalized drift component while $b(X,t)^2/2$ is the generalized diffusion coefficient.\\
+The FP can be express as a continuity eq:
+\begin{align}
+  \label{eq:continuity}
+  \frac{\partial P(X, t)}{\partial t}+\frac{\partial J(X, t)}{\partial X}=0
+\end{align}
+where
+\begin{align*}
+  J(X, t)=a(X, t) P(X, t)-\frac{1}{2} \frac{\partial}{\partial X}\left(b^{2}(X, t) P(X, t)\right)
+\end{align*}
+which can be interpreted as a probability current.
+Let $X \in \mathbb{R}$, we consider an interval $I=[X_1,X_2]$ and define the probability that the stochastic process described by \eqref{eq:continuity} is in $I$, $\mathcal{P}(t)$,
+\begin{align*}
+  \mathcal{P}(t) = \int_I P(X,t) \, dX
+\end{align*}
+Integrating \eqref{eq:continuity} in $X$, we obtain
+\begin{align*}
+  \frac{\partial \mathcal{P}(t)}{\partial t}=J\left(X_{1}, t\right)-J\left(X_{2}, t\right)
+\end{align*}
+
+This form is quite useful because, usually, in numerical simulation one woks with stochastic processes confined in finite intervals. To this situation, we can apply different boundary conditions:
+\begin{itemize}[leftmargin=*]
+  \item Reflective barriers\\
+  E.g. $J(X_1,t)=J(X_2,t)=0 \quad \forall t$, i.e. zero probability flow outside as well as inside the interval, which correspond to a conservation of the total probability in that interval.
+  \item Absorbing barriers\\
+  Hence $P(X_1,t) = P(X_2,t) = 0 \quad \forall t$.
+  \item Periodic Boundaries\\
+  Hence $P(X_1,t) = P(X_2,t)$ and $J(X_1,t)=J(X_2,t)$.
+\end{itemize}
+
+
+% stationary solution
+\subsection{Stationary solution in the diffusive case}
+The stationary distrbution $P^{*}(X)$ is defined as:
+\begin{align}
+  \label{eq:dx_flux}
+  &\frac{\partial P(X, t)}{\partial t} \quad \Rightarrow \quad \frac{\partial J(X, t)}{\partial X}=0 \\ \notag
+  &\Rightarrow \quad \frac{d}{d X}\left(a(X) P^{*}(X)\right)-\frac{1}{2} \frac{d^{2}}{d X^{2}}\left(b^{2}(X) P^{*}(X)\right)=0
+\end{align}
+Note that here we have only total derivatives. Moreover, it was assumed that $a(X)$ and $b(X)$ don't depend on time anymore.
+Considering the case in which $a = 0$ and $b^2 =2D$, the general solution is given integrating two times w.r.t. $X$ obtaining:
+\begin{align}
+  \label{eq:statSol}
+  P^*(X) = C_1 X + C_2
+\end{align}
+where $C_1, C_2$ are constant to be determine by boundary and normalization conditions.
+
+Let's consider \emph{reflective boundaries}.\\
+The continuity equation reads:
+\begin{align*}
+  J^* (X_i) = -D \frac{d }{d X} P^*(X_i) = 0
+\end{align*}
+for $i = 1,2$. From \eqref{eq:statSol} we have $C_1 = 0$ and considering the normalization in $I$
+\begin{align*}
+  \int_{X_1}^{X_2} P^* (X) \, dX = C_2 (X_2 - X_1) = 1 \quad \Rightarrow \quad C_2 = (X_2 - X_1)^{-1}
+\end{align*}
+Hence, in this case, the stationary probability is a constant.
+
+Let's consider \emph{absorbing barriers}\\
+If both extrema are absorbing, then $P^*$ is identically zero. This because we have the system:
+\begin{align*}
+  &C_1 X_1 + C_2 = 0 \\
+  &C_1 X_2 + C_2 = 0
+\end{align*}
+which has solution $C_1 = C_2 = 0$ and it's the only one because the coefficient matrix is non-singular. This reflect the fact that, at infinite time, the random walk eventually encounters an absorbing barrier. \\
+A more interesting situation is when we consider a set of random walkers. Basically we inject at each time step a random walker in $X_0 \in I$, generating a flux of random walkers.
+In this case, the general solution for the stationary distribution is
+\begin{align*}
+  P^{*}(X)=\left\{\begin{array}{ll}{C_{1}\left(X-X_{1}\right),} & {\text { for } X<X_{0}} \\
+  {C_{2}\left(X_{2}-X\right),} & {\text { for } X>X_{0}}\end{array}\right. % the . is an invisible characher to cunter balance the \left and \right's
+\end{align*}
+because it satisfy the boundary conditions $P^*(X_1)=P^*(X_2)=0$. The probability distribution has to be continuous in $X_0$, hence the following must be satisfied:
+\begin{align*}
+  C_{1}\left(X_{0}-X_{1}\right)=C_{2}\left(X_{2}-X_{0}\right)
+\end{align*}\\
+The extra flux has to be taken into account in the continuity equation:
+\begin{align*}
+  \frac{\partial P(X, t)}{\partial t}+\frac{\partial J(X, t)}{\partial X}= F \, \delta (X - X_0)
+\end{align*}
+In the stationary case, $\partial_t P(X,t) = 0$, we have that the flux must satisfy:
+\begin{align*}
+  F &= \int_{X_0 - \varepsilon}^{X_0 + \varepsilon} \partial_t J \, dX  \\
+    &= -D \left[ \frac{d P^*}{dX}\Bigr|_{X_0 + \varepsilon} - \frac{d P^*}{dX}\Bigr|_{X_0 - \varepsilon} \right] \\
+    &= -D [C_1 + C_2]
+\end{align*}
+The latter along with the continuity constrain for the $P^*$ gives non-homogeneous system for $C_1$ and $C_2$ which has solutions:
+\begin{align*}
+  C_1 = \frac{F}{D} \frac{X_2 - X_0}{X_2 - X_1} \qquad C_2 = \frac{F}{D} \frac{X_0 - X_1}{X_2 - X_1}
+\end{align*}
+Finally the stationary solutions for the density probability and for the current are, defining $L_+ = X_2-X_0$ and $L_- = X_0-X_1$ and $L = X_2-X_1$:
+\begin{align}
+  P^{*}(X)=\left\{\begin{array}{l}{\frac{F}{D} \frac{L_{+}}{L}\left(X-X_{1}\right)} \vspace{5pt} \\
+  {\frac{F}{D} \frac{L_{-}}{L}\left(X_{2}-X\right)}\end{array}\right.
+\end{align}
+\begin{align}
+  J^{*}(X)=\left\{\begin{array}{ll}{-F \frac{L_{+}}{L} := -J_{-},} & {\text {for } X<X_{0}} \vspace{5pt}\\
+  {F \frac{L_{-}}{L} := J_{+},} & {\text {for } X>X_{0}}\end{array}\right.
+\end{align}
+Basically, $J_-$ and $J_$ represent the fluxes of random walkers being absorbed at $X_1$ and $X_2$ respectively which satisfy the conservation of "particles" $J_+ + J_- = F$.
+
+\subsection{Probability to leave from $X_1$}
+In this framework we can introduce the probability that a particle, starting from $X_0$, is absorbed at $X_1$:
+\begin{align}
+  \label{eq:prob_absorbing_FP}
+  \Pi\left(X_{1} | X_{0}\right)=\frac{J_{-}}{F}=\frac{L_{+}}{L}=\frac{X_{2}-X_{0}}{X_{2}-X_{1}}
+\end{align}
+which is basically the exit flux from $X_1$ divided by the injected flux $F$.
+\begin{rem}
+  We can notice that what we obtained is a restatement of \eqref{eq:solS} obtained considering continuous approach given by the FP equation.
+\end{rem}
+Moreover one can obtain the average exit time from $X_1$ by considering the total number of random walkers divided by the total current flow out, a.k.a $F$.
+
+
+% D.5
+% -------------------
+\section[Isotropic RW with a trap]{Isotropic RW with a trap\footnote{It's a \emph{trap}!} }
+The FP associated to a 1D RW with  probability density distribution $p(x,t)$ is
+\begin{align*}
+  \frac{\partial p}{\partial t}=D \frac{\partial^{2} p}{\partial x^{2}}
+\end{align*}
+With the initial condition $p(x,0)=\delta(x-x_0)$ where $x_0 = x(0)$, the solution to the latter is a gaussian:
+\begin{align*}
+  p_{x_{0}}(x, t)=\frac{1}{\sqrt{4 \pi D t}} \exp \left(-\frac{\left(x-x_{0}\right)^{2}}{4 D t}\right)
+\end{align*}
+Note: this can be obtained by Fourier transforming the diffusion equation into the $\vec{k}$ space, impose the initial condition and go back to the real space.
+
+Let's introduce a trap in $x_t = 0$.
+\begin{dfn}
+  A trap in $x_t$, is defined as the point in which $p(x_t,t)=0 \quad \forall t$.
+\end{dfn}
+This condition is satisfied by taking a linear combination of the previous solution such that:
+\begin{align}
+  \label{eq:sol_trap}
+  p(x, t)=\frac{1}{\sqrt{4 \pi D t}}\left[\exp \left(-\frac{\left(x-x_{0}\right)^{2}}{4 D t}\right)-\exp \left(-\frac{\left(x+x_{0}\right)^{2}}{4 D t}\right)\right]
+\end{align}
+which satisfy the definition.
+
+\subsection{First passage probability}
+The first passage probability $f(t)$ is the probability that the particle is trapped in $x_t=0$ in the time interval $[t,t+dt]$ and it's equal to the module of the current $|J|$ evaluated at $x_t$.
+Basically, this as a similar interpretation to the stationary probability for a set of random walkers to be absorbed in an absorbing barrier, i.e. equation \eqref{eq:prob_absorbing_FP}.
+Hence using \eqref{eq:sol_trap}:
+\begin{align*}
+  f (t) = \left|  J(x,t) \Bigr|_{x=0} \right| = \left|  -D \frac{\partial p(x,t)}{\partial x}\Bigr|_{x=0} \right| = \frac{x_{0}}{\sqrt{4 \pi D t^{3}}} \exp \left(-\frac{x_{0}^{2}}{4 D t}\right)
+\end{align*}
+A quick check, by integrating over time from 0 to $\infty$, conferm that the probability is normalized. \\
+Note: the average trapping time, time in which the particle is \emph{not} absorbed, $<t_t>$ is divergent because for large $t \Rightarrow f(t) \sim 1/\sqrt{t}$ and the definition is:
+\begin{align*}
+  \langle t_t \rangle = \int_0^\infty t \, f(t) \, dt
+\end{align*}
+Nevertheless,  the \emph{median} trapping time $t_{med}$, defined as:
+\begin{align*}
+  \int_{t_{med}}^\infty f(t)\, dt = \int_0^{t_{med}} f(t) \, dt
+\end{align*}
+it is finite and scales as $x_0^2/D$ (???).
+
+\subsection{Mean position}
+The mean position $\langle x \rangle$ for this process can be computed as follows:
+\begin{align*}
+  \langle x(t)\rangle &= \int_{0}^{\infty} d x \frac{x}{\sqrt{4 \pi D t}}\left[\exp \left(-\frac{\left(x-x_{0}\right)^{2}}{4 D t}\right)-\exp \left(-\frac{\left(x+x_{0}\right)^{2}}{4 D t}\right)\right] \\
+                      &= \int_{0}^{\infty} d x \frac{x}{\sqrt{4 \pi D t}} \exp \left(-\frac{\left(x-x_{0}\right)^{2}}{4 D t}\right)+\int_{-\infty}^{0} d x \frac{x}{\sqrt{4 \pi D t}} \exp \left(-\frac{\left(x-x_{0}\right)^{2}}{4 D t}\right) \\
+                      &= \int_{-\infty}^{\infty} d x \frac{x}{\sqrt{4 \pi D t}} \exp \left(-\frac{\left(x-x_{0}\right)^{2}}{4 D t}\right) \\
+                      &= x_0
+\end{align*}
+where we performed the change of variable $x \rightarrow -x$ in the second integral of the first equality.
+\begin{rem}
+  Notice that the mean position over time doesn't change with the presence of a trap.
+\end{rem}
+
+
+% D.5 anisotropic
+% -----------------
+\section[Anisotropic RW with a trap]{Anisotropic RW with a trap\footnote{Oh no, again.}}
+We consider a RW with a negative drift term, i.e. $-v $ where $v>0$ hence the RW tends to move toward left. This is described by the FP:
+\begin{align*}
+  \frac{\partial p}{\partial t}=v \frac{\partial p}{\partial x}+D \frac{\partial^{2} p}{\partial x^{2}}
+\end{align*}
+Assuming the initial condition $p(x,0)=\delta (x-x_0)$  and no traps, the solution is given by:
+\begin{align}
+  \label{eq:sol_drift}
+  p_{x_{0}}(x, t)=\frac{1}{\sqrt{4 \pi D t}} \exp \left(-\frac{\left(x-x_{0}+v t\right)^{2}}{4 D t}\right)
+\end{align}
+This can be obtained as in the case of the diffusion equation.\\
+Let's introduce a trap in $x_t=0$. In this case the solution  can be abtained as in the previous chapter, by linearly combining the solution \eqref{eq:sol_drift} to satisfy the condition $p(0,t)=t$ for any time.
+Hence:
+\begin{align*}
+  p(x, t)=\frac{1}{\sqrt{4 \pi D t}}\left[\exp \left(-\frac{\left(x-x_{0}+v t\right)^{2}}{4 D t}\right)-\exp \left(\frac{v x_{0}}{D}\right) \exp \left(-\frac{\left(x+x_{0}+v t\right)^{2}}{4 D t}\right)\right]
+\end{align*}
+Note the different signs in $x_0$.
+
+
+\subsection{First passage time}
+As before, the first passage time $f(t)$ is defined as the module of the current evaluated in $x_t=0$. Since we have a drift term, the current is, see equation \eqref{eq:dx_flux}:
+\begin{align*}
+  J(x,t) = -v\, p(x,t) -D \frac{\partial p}{\partial x}
+\end{align*}
+Thus:
+\begin{align*}
+  f (t) &= \left|  J(x,t) \Bigr|_{x=0} \right| = D \left| \frac{\partial p}{\partial x} \Bigr|_{x=0} \right| \\
+        &= \frac{D}{\sqrt{4 \pi D t}}\left[\exp \left(-\frac{\left(x_{0}-v t\right)^{2}}{4 D t}\right) \frac{\left(x_{0}-v t\right)}{2 D t}+ \exp \left(\frac{v x_{0}}{D}\right) \exp \left(-\frac{\left(x_{0}+v t\right)^{2}}{4 D t}\right) \frac{\left(x_{0}+v t\right)}{2 D t}\right] \\
+        &= \frac{x_{0}}{\sqrt{4 \pi D t^{3}}} \exp \left(-\frac{\left(x_{0}-v t\right)^{2}}{4 D t}\right)
+\end{align*}
+
+Now we want to compute the probability that the particle is absorbed within $t$, which is basically the integral from 0 to $t$ of $f(t)$. What we'll performe can be done also for the isotropic case, because the functional form is always a gaussian.
+Hence:
+\begin{align*}
+  \int_0^t f(t) \, dt &= \frac{x_{0}}{\sqrt{4 \pi D}} \exp \left(\frac{x_{0} v}{2 D}\right) \int_{0}^{t} \frac{d t^{\prime}}{\left(t^{\prime}\right)^{3 / 2}} \exp \left(-\left(\frac{x_{0}^{2}}{4 D} \frac{1}{t^{\prime}}+\frac{v^{2}}{4 D} t^{\prime}\right)\right) \\
+                      &= \frac{2}{\sqrt{\pi}} e^{c} \int_{\bar{u}}^{\infty} d u \exp \left(-\left(u^{2}+\frac{c^{2}}{4 u^{2}}\right)\right)
+\end{align*}
+where $\bar{u} = x_0/\sqrt{4Dt}$ and $c= v x_0/2D$ and the last passage is done using the substitution $u^2=x_0^2/4Dt^'$.
+For the latter integral, we introduce the \emph{error function} erf$(t)$ which is defined for $c>0$:
+\begin{align*}
+  \int d u \exp \left(-\left(u^{2}+\frac{c^{2}}{4 u^{2}}\right)\right)=\frac{\sqrt{\pi}}{4}\left[e^{c} \operatorname{erf}\left(\frac{c}{2 u}+u\right)-e^{-c} \operatorname{erf}\left(\frac{c}{2 u}-u\right)\right]
+\end{align*}
+Hence we get:
+\begin{align}
+  \label{eq:erf}
+  \int_0^t f(t) \, dt &= \frac{x_{0}}{\sqrt{4 \pi D t^{3}}} \exp \left(-\frac{\left(x_{0}-v t\right)^{2}}{4 D t}\right)\\ \notag
+                      &=  \frac{e^{c}}{2}\left\{e^{c}\left[1-\operatorname{erf}\left(\frac{c}{2 \bar{u}}+\bar{u}\right)\right]+e^{-c}\left[1+\operatorname{erf}\left(\frac{c}{2 \bar{u}}-\bar{u}\right)\right]\right\}
+\end{align}
+where $\operatorname{erf}(\infty)=1$ is used.
+For $t \rightarrow \infty$ we have $\bar{u} \rightarrow 0$, hence the previous becomes $\int_0^\infty f(t) dt = 1$, as it should be. Note, this is true for every $v$, i.e. for every $c>0$.
+
+We now want to consider the equation \eqref{eq:erf} in the $t \gg 1$ limit.\\
+In this case $\bar{u}\rightarrow \infty$ and the argument of the $\operatorname{erf}(x)$ function diverges. We use the asymptotic behavior:
+\begin{align*}
+  \operatorname{erf}(x) \simeq 1-\frac{e^{-x^{2}}}{\sqrt{\pi} x}, \quad \text { for } \quad x \rightarrow+\infty
+\end{align*}
+Getting in the limit of $\bar{u} \rightarrow 0$,
+\begin{align*}
+ \int_{0}^{t} d t^{\prime} f(t') & \simeq 1+\frac{e^{c}}{2 \sqrt{\pi}} \exp \left(-\frac{c^{2}}{4 \bar{u}^{2}}\right)\left[\frac{1}{\frac{c}{2 \bar{u}}+\bar{u}}-\frac{1}{\frac{c}{2 \bar{u}}-\bar{u}}\right] \\ & \simeq 1-\frac{4}{\sqrt{\pi}} \frac{e^{c}}{c^{2}} \bar{u}^{3} \exp \left(-\frac{c^{2}}{4 \bar{u}^{2}}\right)
+\end{align*}
+The survival probability $S(t)$ can be obtained as follow, making explicit the expression for $c$ and $\bar{u}$,
+\begin{align}
+  S(t) := 1- \int_0^t f(t') \, dt' \simeq \frac{2}{\sqrt{\pi}} \frac{x_{0} \sqrt{D}}{v^{2}} \frac{e^{\frac{v x_{0}}{2 D}}}{t^{3 / 2}} \exp \left(-\frac{v^{2}}{4 D} t\right)
+\end{align}
+
+\subsection{Average time before being trapped}
+Let's compute the average time before being trapped:
+\begin{align*}
+  \left\langle t_{\mathrm{rr}}\right\rangle &=\int_{0}^{\infty} dt\; t f(t)=\frac{x_{0}}{\sqrt{4 \pi D}} \int_{0}^{\infty} \frac{d t}{\sqrt{t}} \exp \left(-\frac{\left(x_{0}-v t\right)^{2}}{4 D t}\right) \\ &=\frac{x_{0}}{\sqrt{4 \pi D}} \exp \left(\frac{x_{0} v}{2 D}\right) \int_{0}^{\infty} \frac{d t}{\sqrt{t}} \exp \left(-\left(\frac{x_{0}^{2}}{4 D} \frac{1}{t}+\frac{v^{2}}{4 D} t\right)\right) \\ &=\sqrt{\frac{x_{0}^{3}}{\pi D v}} \exp \left(\frac{x_{0} v}{2 D}\right) K_{1 / 2}\left(\frac{x_{0} v}{2 D}\right)
+\end{align*}
+where $K_{1 / 2}(x)$ is the modified Bassel function of the second kind, where the integral representation used is the following:
+\begin{align*}
+  K_{\nu}(z)=\frac{z^{\nu}}{2^{\nu+1}} \int_{0}^{\infty} t^{-\nu-1} e^{-t-z^{2} / 4 t} d t
+\end{align*}
+was used\footnote{See this post \url{https://tinyurl.com/yx49fb9t}.}\\
+For small asymmetry in the RW, i.e. small $v$, we have that $K_{1/2}(x) \simeq \sqrt{\pi/(2x)}$. Hence in this case we have:
+\begin{align*}
+  \left\langle t_{\mathrm{rr}}\right\rangle \simeq \frac{x_0}{v} \exp \left( \frac{x_0v}{2D} \right), \qquad \text{for} \; v \rightarrow 0
 \end{align*}
 
 
