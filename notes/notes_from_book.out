@@ -1,4 +1,4 @@
-\BOOKMARK [1][-]{section.1}{Random walk with absorbing barriers}{}% 1
+\BOOKMARK [1][-]{section.1}{RW with absorbing barriers: discrete time and space}{}% 1
 \BOOKMARK [2][-]{subsection.1.1}{Solutions for r=1/2 and r=1/2}{section.1}% 2
 \BOOKMARK [2][-]{subsection.1.2}{Thermo limit}{section.1}% 3
 \BOOKMARK [1][-]{section.2}{FP: Stationary diffution with absorbing barriers}{}% 4
@@ -10,3 +10,9 @@
 \BOOKMARK [1][-]{section.4}{Anisotropic RW with a trap}{}% 10
 \BOOKMARK [2][-]{subsection.4.1}{First passage time}{section.4}% 11
 \BOOKMARK [2][-]{subsection.4.2}{Average time before being trapped}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{Compact Direct Percolation \(DCP\)}{}% 13
+\BOOKMARK [2][-]{subsection.5.1}{Introduction}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.3}{}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.4}{}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.5}{ and }{section.5}% 18
