@@ -1,6 +1,8 @@
 # importing basic tools
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy
+from scipy.stats import chisquare
 
 def rw_absorbing(j,a,b,r,seed):
     '''
@@ -39,7 +41,6 @@ def rw_absorbing(j,a,b,r,seed):
         
     return position 
         
-
 def pj(j,a,b,r,n):
     '''
     Return the fraction of n particles performing a biased RW
@@ -60,6 +61,9 @@ def pj(j,a,b,r,n):
         d = {a : 0, b : n}
     # all other cases
     else:
+        # I inizialize each particle with a sequential seed in order to avoid
+        # two particle to have the same seed.
+        # Note: this method produce the same seeds at each call
         seeds = np.arange(n) # different seeds for the n particles
         final_points = np.array([ rw_absorbing(j,a,b,r,seeds[i]) 
                             for i in range(n) ]) # where the particles are absorbed
@@ -76,8 +80,7 @@ def pj(j,a,b,r,n):
     
     return d[a]/n
 
-
-def test_and_visualize(a,b,r,n,visual=False):
+def distribution(a,b,r,n,visual=False):
     '''
     Test function for pj and rw_absorbing
     '''
@@ -121,9 +124,26 @@ def pj_s(N):
     
     return pp
 
-def comparison(r,N,n, save=False):
+def pj_as_thermo(r,N):
+    '''
+    Returns the theoretical distribution for the r>1/2 case in the Thermodynamic limit
+    '''
+    # Check to have r > 0.5
+    if r <= 0.5:
+        raise ValueError('r must be > 0.5')
+    
+    s = (1-r)/r
+    pp = np.zeros(N)
+    
+    for i,j in zip(range(N),range(1,N+1)):
+        pp[i] = s**(j-1)
+        
+    return pp
+
+def comparison(r,N,n,save=False):
     '''
     Plots comparison between theory and simulations
+    Both graphs for the asymmetric case and the symmetric case are displayed
     '''
 
     axis = list(range(1,N+1))
@@ -132,10 +152,10 @@ def comparison(r,N,n, save=False):
     s = 14
 
     # asymmetric
-    sim = test_and_visualize(1,N,r,n,visual=False)
-    theo_as = pj_as(r,N)
+    sim = distribution(1,N,r,n,visual=False)
+    theo_as = abs(pj_as(r,N)) # abs to avoid -0
 
-    ax[0].plot(axis, abs(theo_as), '.', c = 'orange', label='prediction')
+    ax[0].plot(axis, theo_as, '.', c = 'orange', label='prediction')
     ax[0].plot(axis, sim, '+', c = 'b', label='simulation')
     ax[0].set_title('Asymmetric case with $n = {}$ walkers and $r={}$'.format(n,r), fontsize=s)
     ax[0].set_xlabel('$j$', fontsize=s)
@@ -144,7 +164,7 @@ def comparison(r,N,n, save=False):
     ax[0].legend(fontsize=s)
 
     # symmetric
-    sim_s = test_and_visualize(1,N,0.5,n,visual=False)
+    sim_s = distribution(1,N,0.5,n,visual=False)
     theo_s = pj_s(N)
 
     ax[1].plot(axis, abs(theo_s), '.', c = 'orange', label='prediction')
@@ -155,4 +175,30 @@ def comparison(r,N,n, save=False):
     ax[1].legend(fontsize=s)
     
     if save == True:
-        plt.savefig('comparison_r_{}_n_{}_N_{}'.format(r,n,N), format='pdf')
+        plt.savefig('saved/comparison_r_{}_n_{}_N_{}'.format(r,n,N), format='pdf')
+    
+def comparison_thermo(r,N,n,save=False):
+    '''
+    Plots comparison between theory and simulations for the termodynamic case (r>0.5)
+    '''
+
+    axis = list(range(1,N+1))
+    fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(9,6))
+    
+    s = 14
+
+    # asymmetric
+    sim = distribution(1,N,r,n,visual=False)
+    theo_as = abs(pj_as(r,N)) # abs to avoid -0
+    theo_thermo = abs(pj_as_thermo(r,N))
+
+    ax.plot(axis, theo_as, '.', c = 'darkslategray', label='pred for finite $N$')
+    ax.plot(axis, theo_thermo, c = 'coral', label='pred for infinite $N$')
+    ax.plot(axis, sim, '+', c = 'b', label='simulation')
+    ax.set_title('Thermodynamic case with $n = {}$ walkers and $r={}$'.format(n,r), fontsize=s)
+    ax.set_xlabel('$j$', fontsize=s)
+    ax.set_ylabel('$p_j^{thermo}$', fontsize=s)
+    ax.legend(fontsize=s)
+
+    if save == True:
+        plt.savefig('saved/comparison_thermo_r_{}_n_{}_N_{}'.format(r,n,N), format='pdf')
