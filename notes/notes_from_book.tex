@@ -51,7 +51,7 @@
 
 % Ch 1.5.2
 % ---------------
-\section{RW with absorbing barriers: discrete time and space}
+\section{Discrete: Isotropic RW with 2 absorbing barriers}
 \begin{dfn}[Absorbing barrier]
   An absorbing barrier is a state $i$ such that in the corresponding Markov Chain (MC) has $W_{ii} = 1$.
   Hence, from normalization, $W_{ji} = 0 \quad \forall  j \neq i$.
@@ -64,13 +64,13 @@ where $ W_{i+1,i} = r $ and $W_{i-1,i} = 1-r$. Note the absorbing conditions on 
 \begin{rem}
   Also note the convention on indices: the row index, the first one form the left, is relative to the final state while the column index, the second one, is relative to the initial state.
 \end{rem}
-For any $j \in [1,N] \subset \mathbb{N}$ the walker has probability 1 to be absorbed by one of the barriers\footnote{See P. Brémaud, "Markov chains".}. We can conclude that from the structure of $W$ the MC is irreducible but, apart of the persistent states 1 and $N$, all the others are transient
+For any $j \in [1,N] \subset \mathbb{N}$ the walker has probability 1 to be absorbed by one of the barriers at some point in time\footnote{See P. Brémaud, "Markov chains".}. We can conclude that from the structure of $W$ the MC is irreducible but apart of the persistent states 1 and $N$ all others are transient
 \begin{dfn}
   A MC is said to be \emph{irreducible} if all states are accessible from any other states. Formally, there exist a $t$ such that $W^t_{j,i} > 0 \quad \forall j, i$.\\
   A state $i$ is said to be \emph{persistent} if $W_{i,i}=1$. On the other hand, is said to be \emph{transient} if $W_{i,i}<1$.
 \end{dfn}
 
-Which is th probability that a RW starting in $j$ will reach 1 without being absorbed by $N$?\\
+Which is the probability that a RW starting in $j$ will reach 1 without being absorbed by $N$?\\
 Let $p_j =$ time-dependent prob to be trapped at 1 given that the RW started in $j$ at $t=0$. For $j \in [2,N-1]$ it obeys the equation:
 \begin{align}
   \label{eq:pj}
@@ -90,7 +90,7 @@ Lastly, we can identify $\mathbb{P}_k (B) = W_{k+1,k}$ and this proves \eqref{eq
 
 % solution to the equation
 \subsection{Solutions for $r=1/2$ and $r\neq 1/2$}
-We assume $p_k = \psi^k$, i.e the parameter $\psi$ to the $k$, hence
+As we have done the RW on a ring case, we assume $p_k = \psi^k$, i.e the parameter $\psi$ to the $k$, hence
 \begin{align*}
   \psi^j = r\psi^{j+1} + (1-r) \psi^{j-1} \quad \Rightarrow \quad 0 = r\psi^2 - \psi + (1-r)
 \end{align*}
@@ -140,7 +140,7 @@ resulting the the solution for the symmetric case:
 For $r>1/2$ (or $s<1$) and in the limit $N \rightarrow \infty$, we have:
 \begin{align}
   \label{eq:asym_limit}
-  A = 1/s \qquad B = 0 \qquad \Rightarrow \qquad \boxed{p_j = s^{j-1}}
+  A = 1/s \qquad B = 0 \qquad \Rightarrow \qquad \boxed{p_j^{\text{thermo}} = s^{j-1}}
 \end{align}
 hence the probability of being absorbed in 1 starting at $j$ decreases exponentially with $j$ because the system has a bias ($r>1/2$) toward the other absorbing barrier with is at infinity. On the other hand, if $r<1/2$ we have $p_j=1 \quad \forall j$ because the system is driven toward the absorbing 1 state. Stated in other words, eventually the RW will remain trapped in 1.\\
 The same conclusion can be drawn for $r=1/2$ because the unbiased RW is such that any state is visited from any other in a finite amount of time, i.e. from every $j$ eventually one arrives at 1. This can be seen by the symmetric solution or by showing that the unbiased RW is an irreducible MC.
@@ -152,7 +152,7 @@ Hence we can conclude:
 
 % Ch 1.6.3
 % ---------------
-\section{FP: Stationary diffution with absorbing barriers}
+\section{Continuum: Stationary Isotropic RW with 2 absorbing barriers}
 In the context of continuous time ad space stochastic processes we can introduce as a continuous approximation, in space and time, for the master equation the Fokker-Planck equation.
 Without entering into details, the general form of the FP equation for the probability density $P(X,t)$ is the following:
 \begin{align*}
@@ -194,7 +194,7 @@ This form is quite useful because, usually, in numerical simulation one woks wit
 The stationary distrbution $P^{*}(X)$ is defined as:
 \begin{align}
   \label{eq:dx_flux}
-  &\frac{\partial P(X, t)}{\partial t} \quad \Rightarrow \quad \frac{\partial J(X, t)}{\partial X}=0 \\ \notag
+  &\frac{\partial P(X, t)}{\partial t} = 0 \quad \Rightarrow \quad \frac{\partial J(X, t)}{\partial X}=0 \\ \notag
   &\Rightarrow \quad \frac{d}{d X}\left(a(X) P^{*}(X)\right)-\frac{1}{2} \frac{d^{2}}{d X^{2}}\left(b^{2}(X) P^{*}(X)\right)=0
 \end{align}
 Note that here we have only total derivatives. Moreover, it was assumed that $a(X)$ and $b(X)$ don't depend on time anymore.
@@ -214,7 +214,7 @@ for $i = 1,2$. From \eqref{eq:statSol} we have $C_1 = 0$ and considering the nor
 \begin{align*}
   \int_{X_1}^{X_2} P^* (X) \, dX = C_2 (X_2 - X_1) = 1 \quad \Rightarrow \quad C_2 = (X_2 - X_1)^{-1}
 \end{align*}
-Hence, in this case, the stationary probability is a constant.
+Hence, in this case, the stationary probability is a constant. This is equivalent to the periodic boundary conditions and so it's related to the solution for the discrete RW in a ring; to obtain the result we must impose $J(X_1)=-J(X_2)$, i.e. all outgoing flux is equal but opposite in sign to the ingoing flux from the other extreme, and the normalization.
 
 Let's consider \emph{absorbing barriers}\\
 If both extrema are absorbing, then $P^*$ is identically zero. This because we have the system:
@@ -223,11 +223,11 @@ If both extrema are absorbing, then $P^*$ is identically zero. This because we h
   &C_1 X_2 + C_2 = 0
 \end{align*}
 which has solution $C_1 = C_2 = 0$ and it's the only one because the coefficient matrix is non-singular. This reflect the fact that, at infinite time, the random walk eventually encounters an absorbing barrier. \\
-A more interesting situation is when we consider a set of random walkers. Basically we inject at each time step a random walker in $X_0 \in I$, generating a flux of random walkers.
+A more interesting situation is when we consider a \emph{set} of random walkers. Basically we inject at each time step a random walker in $X_0 \in I$, generating a flux of random walkers.
 In this case, the general solution for the stationary distribution is
 \begin{align*}
   P^{*}(X)=\left\{\begin{array}{ll}{C_{1}\left(X-X_{1}\right),} & {\text { for } X<X_{0}} \\
-  {C_{2}\left(X_{2}-X\right),} & {\text { for } X>X_{0}}\end{array}\right. % the . is an invisible characher to cunter balance the \left and \right's
+  {C_{2}\left(X_{2}-X\right),} & {\text { for } X>X_{0}}\end{array}\right. % the . is an invisible character to counter balance the \left and \right's
 \end{align*}
 because it satisfy the boundary conditions $P^*(X_1)=P^*(X_2)=0$. The probability distribution has to be continuous in $X_0$, hence the following must be satisfied:
 \begin{align*}
@@ -256,7 +256,7 @@ Finally the stationary solutions for the density probability and for the current
   J^{*}(X)=\left\{\begin{array}{ll}{-F \frac{L_{+}}{L} := -J_{-},} & {\text {for } X<X_{0}} \vspace{5pt}\\
   {F \frac{L_{-}}{L} := J_{+},} & {\text {for } X>X_{0}}\end{array}\right.
 \end{align*}
-Basically, $J_-$ and $J_$ represent the fluxes of random walkers being absorbed at $X_1$ and $X_2$ respectively which satisfy the conservation of "particles" $J_+ + J_- = F$.
+Basically, $J_-$ and $J_+$ represent the fluxes of random walkers being absorbed at $X_1$ and $X_2$ respectively which satisfy the conservation of "particles" $J_+ + J_- = F$.
 
 \subsection{Probability to leave from $X_1$}
 In this framework we can introduce the probability that a particle, starting from $X_0$, is absorbed at $X_1$:
@@ -266,14 +266,14 @@ In this framework we can introduce the probability that a particle, starting fro
 \end{align}
 which is basically the exit flux from $X_1$ divided by the injected flux $F$.
 \begin{rem}
-  We can notice that what we obtained is a restatement of \eqref{eq:solS} obtained considering continuous approach given by the FP equation.
+  We obtained a restatement of \eqref{eq:solS} considering the continuous approach given by the FP equation.
 \end{rem}
 Moreover one can obtain the average exit time from $X_1$ by considering the total number of random walkers divided by the total current flow out, a.k.a $F$.
 
 
 % D.5
 % -------------------
-\section[Isotropic RW with a trap]{Isotropic RW with a trap\footnote{It's a \emph{trap}!} }
+\section{Continuum: Isotropic RW with 1 absorbing barrier}
 The FP associated to a 1D RW with  probability density distribution $p(x,t)$ is
 \begin{align*}
   \frac{\partial p}{\partial t}=D \frac{\partial^{2} p}{\partial x^{2}}
@@ -286,7 +286,7 @@ Note: this can be obtained by Fourier transforming the diffusion equation into t
 
 Let's introduce a trap in $x_t = 0$.
 \begin{dfn}
-  A trap in $x_t$, is defined as the point in which $p(x_t,t)=0 \quad \forall t$.
+  A trap, or absorbing barrier, in $x_t$, is defined as the point in which $p(x_t,t)=0 \quad \forall t$.
 \end{dfn}
 This condition is satisfied by taking a linear combination of the previous solution such that:
 \begin{align}
@@ -302,12 +302,12 @@ which satisfy the definition. A plot for a fixed time is the one in figure \ref{
 
 \subsection{First passage probability}
 The first passage probability $f(t)$ is the probability that the particle is trapped in $x_t=0$ in the time interval $[t,t+dt]$ and it's equal to the module of the current $|J|$ evaluated at $x_t$.
-Basically, this as a similar interpretation to the stationary probability for a set of random walkers to be absorbed in an absorbing barrier, i.e. equation \eqref{eq:prob_absorbing_FP}.
+Basically, this has a similar interpretation to the stationary probability for a set of random walkers to be absorbed in an absorbing barrier, i.e. equation \eqref{eq:prob_absorbing_FP}.
 Hence using \eqref{eq:sol_trap}:
 \begin{align*}
   f (t) = \left|  J(x,t) \Bigr|_{x=0} \right| = \left|  -D \frac{\partial p(x,t)}{\partial x}\Bigr|_{x=0} \right| = \frac{x_{0}}{\sqrt{4 \pi D t^{3}}} \exp \left(-\frac{x_{0}^{2}}{4 D t}\right)
 \end{align*}
-A quick check, by integrating over time from 0 to $\infty$, conferm that the probability is normalized. \\
+A quick check, by integrating over time from 0 to $\infty$ (using the change of variable $\tau^2 = x_0^2/4Dt$), conferm that the probability is normalized. \\
 Note: the average trapping time, time in which the particle is \emph{not} absorbed, $\langle t_t \rangle$ is divergent because for large $t \Rightarrow t\,f(t) \sim 1/\sqrt{t}$ and the definition is:
 \begin{align*}
   \langle t_t \rangle = \int_0^\infty t \, f(t) \, dt \sim \infty
@@ -316,7 +316,6 @@ Nevertheless,  the \emph{median} trapping time $t_{med}$, defined as:
 \begin{align*}
   \int_{t_{med}}^\infty f(t)\, dt = \int_0^{t_{med}} f(t) \, dt
 \end{align*}
-it is finite and scales as $x_0^2/D$ (???).
 
 \subsection{Mean position}
 \label{subsec:mean_pos}
@@ -335,7 +334,7 @@ where we performed the change of variable $x \rightarrow -x$ in the second integ
 
 % D.5 anisotropic
 % -----------------
-\section[Anisotropic RW with a trap]{Anisotropic RW with a trap\footnote{Oh no, again.}}
+\section{Continuum: Anisotropic RW with 1 absorbing barrier}
 We consider a RW with a negative drift term, i.e. $-v $ where $v>0$ hence the RW tends to move toward left. This is described by the FP:
 \begin{align*}
   \frac{\partial p}{\partial t}=v \frac{\partial p}{\partial x}+D \frac{\partial^{2} p}{\partial x^{2}}
@@ -372,15 +371,14 @@ Now we want to compute the probability that the particle is absorbed within $t$,
                       &= \frac{2}{\sqrt{\pi}} e^{c} \int_{\bar{u}}^{\infty} d u \exp \left(-\left(u^{2}+\frac{c^{2}}{4 u^{2}}\right)\right)
 \end{align*}
 where $\bar{u} = x_0/\sqrt{4Dt}$ and $c= v x_0/2D$ and the last passage is done using the substitution $u^2=x_0^2/4Dt^'$.
-For the latter integral, we introduce the \emph{error function} erf$(t)$ which is defined for $c>0$:
+For the latter integral, we introduce the \emph{error function} erf$(t)$ which is defined for $c>0$: (???)
 \begin{align*}
   \int d u \exp \left(-\left(u^{2}+\frac{c^{2}}{4 u^{2}}\right)\right)=\frac{\sqrt{\pi}}{4}\left[e^{c} \operatorname{erf}\left(\frac{c}{2 u}+u\right)-e^{-c} \operatorname{erf}\left(\frac{c}{2 u}-u\right)\right]
 \end{align*}
 Hence we get:
 \begin{align}
   \label{eq:erf}
-  \int_0^t f(t) \, dt &= \frac{x_{0}}{\sqrt{4 \pi D t^{3}}} \exp \left(-\frac{\left(x_{0}-v t\right)^{2}}{4 D t}\right)\\ \notag
-                      &=  \frac{e^{c}}{2}\left\{e^{c}\left[1-\operatorname{erf}\left(\frac{c}{2 \bar{u}}+\bar{u}\right)\right]+e^{-c}\left[1+\operatorname{erf}\left(\frac{c}{2 \bar{u}}-\bar{u}\right)\right]\right\}
+  \int_0^t f(t) \, dt =  \frac{e^{c}}{2}\left\{e^{c}\left[1-\operatorname{erf}\left(\frac{c}{2 \bar{u}}+\bar{u}\right)\right]+e^{-c}\left[1+\operatorname{erf}\left(\frac{c}{2 \bar{u}}-\bar{u}\right)\right]\right\}
 \end{align}
 where $\operatorname{erf}(\infty)=1$ is used.
 For $t \rightarrow \infty$ we have $\bar{u} \rightarrow 0$, hence the previous becomes $\int_0^\infty f(t) dt = 1$, as it should be. Note, this is true for every $v$, i.e. for every $c>0$.
@@ -405,7 +403,7 @@ Let's compute the average time before being trapped:
 \begin{align*}
   \left\langle t_{\mathrm{rr}}\right\rangle &=\int_{0}^{\infty} dt\; t f(t)=\frac{x_{0}}{\sqrt{4 \pi D}} \int_{0}^{\infty} \frac{d t}{\sqrt{t}} \exp \left(-\frac{\left(x_{0}-v t\right)^{2}}{4 D t}\right) \\ &=\frac{x_{0}}{\sqrt{4 \pi D}} \exp \left(\frac{x_{0} v}{2 D}\right) \int_{0}^{\infty} \frac{d t}{\sqrt{t}} \exp \left(-\left(\frac{x_{0}^{2}}{4 D} \frac{1}{t}+\frac{v^{2}}{4 D} t\right)\right) \\ &=\sqrt{\frac{x_{0}^{3}}{\pi D v}} \exp \left(\frac{x_{0} v}{2 D}\right) K_{1 / 2}\left(\frac{x_{0} v}{2 D}\right)
 \end{align*}
-where $K_{1 / 2}(x)$ is the modified Bassel function of the second kind, where the integral representation used is the following:
+where $K_{1 / 2}(x)$ is the modified Bassel function of the second kind, where the integral representation used is the following: (????)
 \begin{align*}
   K_{\nu}(z)=\frac{z^{\nu}}{2^{\nu+1}} \int_{0}^{\infty} t^{-\nu-1} e^{-t-z^{2} / 4 t} d t
 \end{align*}

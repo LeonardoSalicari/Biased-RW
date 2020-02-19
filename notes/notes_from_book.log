@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.2.7)  16 FEB 2020 01:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.2.7)  18 FEB 2020 23:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -513,27 +513,6 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 98.
  [3] [4] [5] [6]
-./notes_from_book.tex:259: Missing { inserted.
-<to be read again> 
-                   $
-l.259 Basically, $J_-$ and $J_$
-                                represent the fluxes of random walkers being...
-A left brace was mandatory here, so I've put one in.
-You might want to delete and/or insert some corrections
-so that I will find a matching right brace soon.
-(If you're confused by all this, try typing `I}' now.)
-
-./notes_from_book.tex:259: Missing } inserted.
-<inserted text> 
-                }
-l.259 Basically, $J_-$ and $J_$
-                                represent the fluxes of random walkers being...
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 261.
@@ -547,30 +526,30 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 261.
 
 [7]
-<plot_iso_RW.pdf, id=164, 433.62pt x 289.08pt>
+<plot_iso_RW.pdf, id=163, 433.62pt x 289.08pt>
 File: plot_iso_RW.pdf Graphic file (type pdf)
 <use plot_iso_RW.pdf>
 Package pdftex.def Info: plot_iso_RW.pdf  used on input line 298.
 (pdftex.def)             Requested size: 430.00462pt x 286.6841pt.
  [8] [9 <./plot_iso_RW.pdf>] [10]
-Overfull \hbox (30.30894pt too wide) detected at line 367
+Overfull \hbox (30.30894pt too wide) detected at line 366
 []
  []
 
-./notes_from_book.tex:374: Missing { inserted.
+./notes_from_book.tex:373: Missing { inserted.
 <to be read again> 
                    ^
-l.374 ...e using the substitution $u^2=x_0^2/4Dt^'
+l.373 ...e using the substitution $u^2=x_0^2/4Dt^'
                                                   $.
 A left brace was mandatory here, so I've put one in.
 You might want to delete and/or insert some corrections
 so that I will find a matching right brace soon.
 (If you're confused by all this, try typing `I}' now.)
 
-./notes_from_book.tex:374: Missing } inserted.
+./notes_from_book.tex:373: Missing } inserted.
 <inserted text> 
                 }
-l.374 ... using the substitution $u^2=x_0^2/4Dt^'$
+l.373 ... using the substitution $u^2=x_0^2/4Dt^'$
                                                   .
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -583,94 +562,95 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [12] [13]
+ [12]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 449.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\beta' on input line 449.
+(hyperref)                removing `math shift' on input line 447.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `superscript' on input line 449.
+(hyperref)                removing `\beta' on input line 447.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\prime' on input line 449.
+(hyperref)                removing `superscript' on input line 447.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 449.
+(hyperref)                removing `\prime' on input line 447.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 469.
+(hyperref)                removing `math shift' on input line 447.
+
+[13]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 467.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\beta' on input line 469.
+(hyperref)                removing `\beta' on input line 467.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 469.
+(hyperref)                removing `math shift' on input line 467.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 485.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\theta' on input line 485.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 485.
 
 [14]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 487.
+(hyperref)                removing `math shift' on input line 495.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\theta' on input line 487.
+(hyperref)                removing `\nu' on input line 495.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 487.
+(hyperref)                removing `subscript' on input line 495.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 497.
+(hyperref)                removing `\perp' on input line 495.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\nu' on input line 497.
+(hyperref)                removing `math shift' on input line 495.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 497.
+(hyperref)                removing `math shift' on input line 495.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\perp' on input line 497.
+(hyperref)                removing `\nu' on input line 495.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 497.
+(hyperref)                removing `subscript' on input line 495.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 497.
+(hyperref)                removing `\parallel' on input line 495.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\nu' on input line 497.
+(hyperref)                removing `math shift' on input line 495.
 
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 497.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\parallel' on input line 497.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 497.
-
-./notes_from_book.tex:503: Undefined control sequence.
-l.503 ...text of single active site IC and $p \seq
+./notes_from_book.tex:501: Undefined control sequence.
+l.501 ...text of single active site IC and $p \seq
                                                    p_c$, $\xi_{\perp}$ repre...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -679,30 +659,30 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 [15]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 531.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 529.
  [16]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 531.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 529.
  (./notes_from_book.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 531.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 531.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 529.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 529.
 Package rerunfilecheck Info: File `notes_from_book.out' has not changed.
-(rerunfilecheck)             Checksum: ABB8186D50EBDBF9ADA3D8163FD8CCFF;1220.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 531.
+(rerunfilecheck)             Checksum: 9213B9DE3509A8864E75CABE04DCBB5D;1277.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 529.
  ) 
 Here is how much of TeX's memory you used:
- 10519 strings out of 492167
- 154361 string characters out of 6131559
- 316877 words of memory out of 5000000
- 14578 multiletter control sequences out of 15000+600000
- 19880 words of font info for 114 fonts, out of 8000000 for 9000
+ 10485 strings out of 492167
+ 153751 string characters out of 6131559
+ 317934 words of memory out of 5000000
+ 14549 multiletter control sequences out of 15000+600000
+ 17126 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,17n,45p,705b,367s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 33i,17n,45p,705b,419s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on notes_from_book.pdf (16 pages, 318373 bytes).
+pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on notes_from_book.pdf (16 pages, 310166 bytes).
 PDF statistics:
- 350 PDF objects out of 1000 (max. 8388607)
- 293 compressed objects within 3 object streams
- 60 named destinations out of 1000 (max. 500000)
- 17558 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 342 PDF objects out of 1000 (max. 8388607)
+ 286 compressed objects within 3 object streams
+ 58 named destinations out of 1000 (max. 500000)
+ 12950 words of extra memory for PDF output out of 14400 (max. 10000000)
 
