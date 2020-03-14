@@ -58,7 +58,7 @@
 \end{dfn}
 Setup: we have a 1D random walker in a system of $N$ discrete points. Both in $1$ and $N$ we have absorbing barriers. The corresponding transition probability matrix is the follow:
 \begin{align*}
-  W = \left( \begin{array}{ccccccccc}{1} & {0} & {0} & {0} & {0} & {\cdots} & {0} & {0} & {0} \\ {0} & {0} & {1-r} & {0} & {0} & {\cdots} & {0} & {0} & {0} \\ {0} & {r} & {0} & {1-r} & {0} & {\cdots} & {0} & {0} & {0} \\ {0} & {0} & {r} & {0} & {1-r} & {\cdots} & {0} & {0} & {0} \\ {\vdots} & {\vdots} & {\vdots} & {\vdots} & {\vdots} & {\ddots} & {\vdots} & {\vdots} & {\vdots} \\ {0} & {0} & {0} & {0} & {0} & {\cdots} & {0} & {0} & {1} \end{array} \right)
+  W = \left( \begin{array}{ccccccccc}{1} & {1-r} & {0} & {0} & {0} & {\cdots} & {0} & {0} & {0} \\ {0} & {0} & {1-r} & {0} & {0} & {\cdots} & {0} & {0} & {0} \\ {0} & {r} & {0} & {1-r} & {0} & {\cdots} & {0} & {0} & {0} \\ {0} & {0} & {r} & {0} & {1-r} & {\cdots} & {0} & {0} & {0} \\ {\vdots} & {\vdots} & {\vdots} & {\vdots} & {\vdots} & {\ddots} & {\vdots} & {\vdots} & {\vdots} \\ {0} & {0} & {0} & {0} & {0} & {\cdots} & {0} & {r} & {1} \end{array} \right)
 \end{align*}
 where $ W_{i+1,i} = r $ and $W_{i-1,i} = 1-r$. Note the absorbing conditions on 1 and $N$.
 \begin{rem}
@@ -241,7 +241,7 @@ In the stationary case, $\partial_t P(X,t) = 0$, we have that the flux must sati
 \begin{align*}
   F &= \int_{X_0 - \varepsilon}^{X_0 + \varepsilon} \partial_X J \, dX  \\
     &= -D \left[ \frac{d P^*}{dX}\Bigr|_{X_0 + \varepsilon} - \frac{d P^*}{dX}\Bigr|_{X_0 - \varepsilon} \right] \\
-    &= -D [C_1 + C_2]
+    &= D [C_1 + C_2]
 \end{align*}
 The latter along with the continuity constrain for the $P^*$ gives a non-homogeneous system for $C_1$ and $C_2$ which has solutions:
 \begin{align*}
@@ -371,7 +371,7 @@ Now we want to compute the probability that the particle is absorbed within $t$,
                       &= \frac{2}{\sqrt{\pi}} e^{c} \int_{\bar{u}}^{\infty} d u \exp \left(-\left(u^{2}+\frac{c^{2}}{4 u^{2}}\right)\right)
 \end{align*}
 where $\bar{u} = x_0/\sqrt{4Dt}$ and $c= v x_0/2D$ and the last passage is done using the substitution $u^2=x_0^2/4Dt^'$.
-For the latter integral, we introduce the \emph{error function} erf$(t)$ which is defined for $c>0$: (???)
+For the latter integral, we introduce the \emph{error function} erf$(t)$ which is defined for $c>0$:\footnote{See "Handbook of mathematical functions" edited by M. Abramowtz and I. A. Stegun, eq 7.4.33; in this case we the fact that erf is a odd function for the second term in the r.h.s.}
 \begin{align*}
   \int d u \exp \left(-\left(u^{2}+\frac{c^{2}}{4 u^{2}}\right)\right)=\frac{\sqrt{\pi}}{4}\left[e^{c} \operatorname{erf}\left(\frac{c}{2 u}+u\right)-e^{-c} \operatorname{erf}\left(\frac{c}{2 u}-u\right)\right]
 \end{align*}
@@ -384,7 +384,7 @@ where $\operatorname{erf}(\infty)=1$ is used.
 For $t \rightarrow \infty$ we have $\bar{u} \rightarrow 0$, hence the previous becomes $\int_0^\infty f(t) dt = 1$, as it should be. Note, this is true for every $v$, i.e. for every $c>0$.
 
 We now want to consider the equation \eqref{eq:erf} in the $t \gg 1$ limit.\\
-In this case $\bar{u}\rightarrow \infty$ and the argument of the $\operatorname{erf}(x)$ function diverges. We use the asymptotic behavior:
+In this case $1/\bar{u}\rightarrow \infty$ and the argument of the $\operatorname{erf}(x)$ function diverges. We use the asymptotic behavior:
 \begin{align*}
   \operatorname{erf}(x) \simeq 1-\frac{e^{-x^{2}}}{\sqrt{\pi} x}, \quad \text { for } \quad x \rightarrow+\infty
 \end{align*}
@@ -403,11 +403,7 @@ Let's compute the average time before being trapped:
 \begin{align*}
   \left\langle t_{\mathrm{rr}}\right\rangle &=\int_{0}^{\infty} dt\; t f(t)=\frac{x_{0}}{\sqrt{4 \pi D}} \int_{0}^{\infty} \frac{d t}{\sqrt{t}} \exp \left(-\frac{\left(x_{0}-v t\right)^{2}}{4 D t}\right) \\ &=\frac{x_{0}}{\sqrt{4 \pi D}} \exp \left(\frac{x_{0} v}{2 D}\right) \int_{0}^{\infty} \frac{d t}{\sqrt{t}} \exp \left(-\left(\frac{x_{0}^{2}}{4 D} \frac{1}{t}+\frac{v^{2}}{4 D} t\right)\right) \\ &=\sqrt{\frac{x_{0}^{3}}{\pi D v}} \exp \left(\frac{x_{0} v}{2 D}\right) K_{1 / 2}\left(\frac{x_{0} v}{2 D}\right)
 \end{align*}
-where $K_{1 / 2}(x)$ is the modified Bassel function of the second kind, where the integral representation used is the following: (????)
-\begin{align*}
-  K_{\nu}(z)=\frac{z^{\nu}}{2^{\nu+1}} \int_{0}^{\infty} t^{-\nu-1} e^{-t-z^{2} / 4 t} d t
-\end{align*}
-was used\footnote{See this post \url{https://tinyurl.com/yx49fb9t}.}\\
+where $K_{1 / 2}(x)$ is the modified Bessel function of the second kind.
 For small asymmetry in the RW, i.e. small $v$, we have that $K_{1/2}(x) \simeq \sqrt{\pi/(2x)}$. Hence in this case we have:
 \begin{align}
   \label{eq:trr}
@@ -417,7 +413,7 @@ For small asymmetry in the RW, i.e. small $v$, we have that $K_{1/2}(x) \simeq \
 
 % Compact direct percolation
 % ------------------
-\section{Compact Direct Percolation (DCP)}
+\section{Compact Directed Percolation (CDP)}
 
 % introduction
 \subsection{Introduction}
@@ -495,8 +491,8 @@ The IC $L(0) = 1$ translate into $x_0=1$ while the absorbing state $L(t)=0$ is r
 \subsection{$\nu_\perp$ and $\nu_\parallel$}
 Near criticality, the space ($\perp$) and time ($\parallel$) correlation lengths diverge as power laws, respectively:
 \begin{align*}
-  &\xi_{\perp} \sim (p-p_c)^{\nu_\perp} \\
-  &\xi_{\parallel} \sim (p-p_c)^{\nu_\parallel}
+  &\xi_{\perp} \sim (p_c-p)^{\nu_\perp} \\
+  &\xi_{\parallel} \sim (p_c-p)^{\nu_\parallel}
 \end{align*}
 In the context of single active site IC and $p \seq p_c$, $\xi_{\perp}$ represent the maximum distance attained before the process dies out and $\xi_{\parallel}$ represent the average lifetime of the walker.
 
@@ -505,7 +501,7 @@ In this approximation we obtained relation \eqref{eq:trr} which reads:
 \begin{align*}
   \left\langle t_{\mathrm{rr}}\right\rangle = \xi_{\parallel} \sim v^{-1}
 \end{align*}
-The drift term is proportional to the asymmetry $\delta$ defined as the difference between the prob to hop to the right and the prob to hop to the left:
+The drift term is proportional to the asymmetry $\delta$\;\footnote{This can be seen from the derivation of the FP eq. starting from the Master eq. $p_j(t+1)=\sum_{i} W_{ji}p_i(t)$ and going into the continuum with the condition $\lim_{N\rightarrow \infty} (\Delta x/\Delta t) (1 - 2r) = -v$, where $2r-1 = \delta$.} defined as the difference between the prob to hop to the right and the prob to hop to the left:
 \begin{align*}
   \delta=\frac{p^{2}-(1-p)^{2}}{p^{2}+(1-p)^{2}}=-\frac{1-2 p}{1+2 p(1-p)} \;\overset{p \rightarrow p_c}{\simeq}\; -\left(p_{c}-p\right)
 \end{align*}
@@ -517,7 +513,7 @@ hence $\nu_\parallel =1$.
 
 On the other hand, the walker perform a RW, hence the relation between the averaged traveled distance $\xi_{\perp}$ and the time $\xi_{\parallel}$ is
 \begin{align*}
-  \xi_{\perp} \sim \xi_{\parallel}^{-1/2} \sim (p-p_c)^{-1/2}
+  \xi_{\perp} \sim \xi_{\parallel}^{1/2} \sim (p-p_c)^{-1/2}
 \end{align*}
 impling $\nu_{\perp}=1/2$.
 
